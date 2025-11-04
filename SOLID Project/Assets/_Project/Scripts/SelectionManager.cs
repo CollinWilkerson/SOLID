@@ -1,33 +1,27 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private string selectableTag = "Selectable";
-    [SerializeField] private Material highlightMaterial;
-    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private ISelection HighlightSelection;
 
     private Transform _selection;
+
 
     private void Awake()
     {
         SceneManager.LoadScene("Environment", LoadSceneMode.Additive);
         SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+        HighlightSelection = gameObject.GetComponent<ISelection>();
     }
 
     private void Update()
     {
-        if (_selection != null)
-        {
-            var selectionRenderer = _selection.GetComponent<Renderer>();
-            if (selectionRenderer != null)
-            {
-                selectionRenderer.material = defaultMaterial;
-            }
-        }
+        HighlightSelection.OnDeselect(_selection);
 
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
+
         _selection = null;
         if (Physics.Raycast(ray, out var hit))
         {
@@ -38,13 +32,6 @@ public class SelectionManager : MonoBehaviour
             }
         }
 
-        if (_selection != null)
-        {
-            var selectionRenderer = _selection.GetComponent<Renderer>();
-            if (selectionRenderer != null)
-            {
-                selectionRenderer.material = highlightMaterial;
-            }
-        }
+        HighlightSelection.OnSelect(_selection);
     }
 }

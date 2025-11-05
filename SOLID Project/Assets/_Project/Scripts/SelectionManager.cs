@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private string selectableTag = "Selectable";
-    [SerializeField] private ISelection HighlightSelection;
+    private ISelection HighlightSelection;
+    private IRayProvider rayProvider;
+    private ISelector selector;
 
-    private Transform _selection;
+    private Transform curSelection;
 
 
     private void Awake()
@@ -14,24 +17,23 @@ public class SelectionManager : MonoBehaviour
         SceneManager.LoadScene("Environment", LoadSceneMode.Additive);
         SceneManager.LoadScene("UI", LoadSceneMode.Additive);
         HighlightSelection = gameObject.GetComponent<ISelection>();
+        rayProvider = gameObject.GetComponent<IRayProvider>();
+        selector = gameObject.GetComponent<ISelector>();
     }
 
     private void Update()
     {
-        HighlightSelection.OnDeselect(_selection);
-
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        _selection = null;
-        if (Physics.Raycast(ray, out var hit))
+        if (HighlightSelection == null)
         {
-            var selection = hit.transform;
-            if (selection.CompareTag(selectableTag))
-            {
-                _selection = selection;
-            }
+            Debug.Log("NO HIGHLIGHT SELECTION");
+            return;
         }
+        HighlightSelection.OnDeselect(curSelection);
 
-        HighlightSelection.OnSelect(_selection);
+        var ray = rayProvider.GetRay();
+
+        curSelection = selector.SelectTaggedObject(ray, selectableTag);
+        
+        HighlightSelection.OnSelect(curSelection);
     }
 }

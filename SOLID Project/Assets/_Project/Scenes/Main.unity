@@ -529,6 +529,8 @@ GameObject:
   - component: {fileID: 1550730621}
   - component: {fileID: 1550730620}
   - component: {fileID: 1550730623}
+  - component: {fileID: 1550730625}
+  - component: {fileID: 1550730624}
   m_Layer: 0
   m_Name: Selection Manager
   m_TagString: Untagged
@@ -574,6 +576,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22d3e623a55ac2b4fa88a1bf8733916e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1550730624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550730619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435a8bfd28c4c0949ad7f705110f2641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1550730625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550730619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf749c3c7cc4dd4aad12f09040612e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1671565416

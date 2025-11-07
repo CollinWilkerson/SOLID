@@ -1,3 +1,4 @@
 # SOLID
+ Play at: https://collinwilkerson.github.io/SOLID/
  
-Unity project refactored to provide starting point for Charles Amat's SOLID tutorial at https://www.youtube.com/watch?v=QDldZWvNK_E
+Based on Charles Amat's SOLID tutorial at https://www.youtube.com/watch?v=QDldZWvNK_E
